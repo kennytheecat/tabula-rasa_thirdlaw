@@ -1,66 +1,46 @@
 <?php
-/* Bones Custom Post Type Example
-This page walks you through creating 
-a custom post type and taxonomies. You
-can edit this one or copy the following code 
-to create another one. 
+// Register Custom Post Type
+function cpt_portfolio() {
 
-I put this in a separate file so as to 
-keep it organized. I find it easier to edit
-and change things if they are concentrated
-in their own file.
+	$labels = array(
+		'name'                => _x( 'Portfolio', 'Post Type General Name', 'tabua_rasa' ),
+		'singular_name'       => _x( 'Portfolio', 'Post Type Singular Name', 'tabua_rasa' ),
+		'menu_name'           => __( 'Portfolio', 'tabua_rasa' ),
+		'parent_item_colon'   => __( 'Parent Portfolio:', 'tabua_rasa' ),
+		'all_items'           => __( 'All Portfolios', 'tabua_rasa' ),
+		'view_item'           => __( 'View Portfolio', 'tabua_rasa' ),
+		'add_new_item'        => __( 'Add New Portfolio', 'tabua_rasa' ),
+		'add_new'             => __( 'Add New', 'tabua_rasa' ),
+		'edit_item'           => __( 'Edit Portfolio', 'tabua_rasa' ),
+		'update_item'         => __( 'Update Portfolio', 'tabua_rasa' ),
+		'search_items'        => __( 'Search Portfolio', 'tabua_rasa' ),
+		'not_found'           => __( 'Not found', 'tabua_rasa' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'tabua_rasa' ),
+	);
+	$args = array(
+		'labels'              => $labels,
+		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', ),
+		'taxonomies'          => array( 'category', 'post_tag' ),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'menu_position'       => 5,
+		'menu_icon'           => '',
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'post',
+	);
+	register_post_type( 'portfolio', $args );
 
-Developed by: Eddie Machado
-URL: http://themble.com/bones/
-*/
+}
 
-
-// let's create the function for the custom type
-function custom_post_example() { 
-	// creating (registering) the custom type 
-	register_post_type( 'custom_type', /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
-	 	// let's now add all the options for this post type
-		array('labels' => array(
-			'name' => __('Custom Types', 'tabula_rasa'), /* This is the Title of the Group */
-			'singular_name' => __('Custom Post', 'tabula_rasa'), /* This is the individual type */
-			'all_items' => __('All Custom Posts', 'tabula_rasa'), /* the all items menu item */
-			'add_new' => __('Add New', 'tabula_rasa'), /* The add new menu item */
-			'add_new_item' => __('Add New Custom Type', 'tabula_rasa'), /* Add New Display Title */
-			'edit' => __( 'Edit', 'tabula_rasa' ), /* Edit Dialog */
-			'edit_item' => __('Edit Post Types', 'tabula_rasa'), /* Edit Display Title */
-			'new_item' => __('New Post Type', 'tabula_rasa'), /* New Display Title */
-			'view_item' => __('View Post Type', 'tabula_rasa'), /* View Display Title */
-			'search_items' => __('Search Post Type', 'tabula_rasa'), /* Search Custom Type Title */ 
-			'not_found' =>  __('Nothing found in the Database.', 'tabula_rasa'), /* This displays if there are no entries yet */ 
-			'not_found_in_trash' => __('Nothing found in Trash', 'tabula_rasa'), /* This displays if there is nothing in the trash */
-			'parent_item_colon' => ''
-			), /* end of arrays */
-			'description' => __( 'This is the example custom post type', 'tabula_rasa' ), /* Custom Type Description */
-			'public' => true,
-			'publicly_queryable' => true,
-			'exclude_from_search' => false,
-			'show_ui' => true,
-			'query_var' => true,
-			'menu_position' => 8, /* this is what order you want it to appear in on the left hand side menu */ 
-			'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
-			'rewrite'	=> array( 'slug' => 'custom_type', 'with_front' => false ), /* you can specify its url slug */
-			'has_archive' => 'custom_type', /* you can rename the slug here */
-			'capability_type' => 'post',
-			'hierarchical' => false,
-			/* the next one is important, it tells what's enabled in the post editor */
-			'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'sticky')
-	 	) /* end of options */
-	); /* end of register post type */
-	
-	/* this adds your post categories to your custom post type */
-	register_taxonomy_for_object_type('category', 'custom_type');
-	/* this adds your post tags to your custom post type */
-	register_taxonomy_for_object_type('post_tag', 'custom_type');
-	
-} 
-
-	// adding the function to the Wordpress init
-	add_action( 'init', 'custom_post_example');
+// Hook into the 'init' action
+add_action( 'init', 'cpt_portfolio', 0 );
 	
 	/*
 	for more information on taxonomies, go here:

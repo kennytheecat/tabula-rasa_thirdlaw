@@ -24,7 +24,7 @@ get_header(); ?>
 
 		<?php if ( have_posts() ) : ?>
 			<header class="archive-header">
-				<h1 class="archive-title">
+				<h3 class="archive-title">
 					<?php
 						if ( is_category() ) :
 							printf( __( 'Category Archives: %s', 'tabula-rasa' ), '<span>' . single_cat_title( '', false ) . '</span>' );
@@ -53,8 +53,8 @@ get_header(); ?>
 						elseif ( is_year() ) :
 							printf( __( 'Yearly Archives: %s', 'tabula-rasa' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
 
-						elseif ( is_tax( 'post_format', 'post-format-aside' ) ) :
-							_e( 'Asides', 'tabula-rasa' );
+						elseif ( is_archive( 'portfolio') ) :
+							_e( 'Portfolio Archives', 'tabula-rasa' );
 							
 						elseif ( is_tax( 'post_format', 'post-format-audio' ) ) :
 							_e( 'Audios', 'tabula-rasa' );
@@ -85,7 +85,7 @@ get_header(); ?>
 
 						endif;
 					?>
-				</h1>
+				</h3>
 				<?php
 					if ( is_category() ) :
 						// show an optional category description

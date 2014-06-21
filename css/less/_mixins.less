@@ -341,19 +341,22 @@ Need help w/ choosing your colors? Try this site out:
 http://0to255.com/
 *********************/
 
-@prim-color      		#ebe16f;
-@sec-color:         #fbe3e4;
-@tert-color:      	#e6efc2;
+@prim-color:    		#48a;
+@sec-color:         #CCC; //6A8E94
+@tert-color:      	#653; //92C4CC 421
 
 @button-pink:     	#C6A;
 @button-blue:     	#68C;
 
-@black:             #444;
+@black:             #222;
 @grey:							#757575;
 @white:             #fff;
 
 @link-color:        #21759b;
-@link-hover:        #0f3647;
+@link-hover:        @prim-color;
+
+@prim-button-color: @tert-color;
+@sec-button-color: @tert-color + 111;
 
 /*
 Here's a great tutorial on how to
@@ -366,8 +369,8 @@ http://sachagreif.com/sass-color-variables/
 TYPOGRAPHY
 *********************/
 
-@sans-serif:         Helvetica, Arial, sans-serif;
-@serif:              "Georgia", Cambria, Times New Roman, Times, serif; 
+@sans-serif:         "Open Sans Condensed", Helvetica, Arial, sans-serif;
+@serif:              "Open Sans", "Georgia", Cambria, Times New Roman, Times, serif; 
 
 
 /* 	To embed your own fonts, use this syntax
@@ -474,9 +477,9 @@ BUTTONS
 *********************/
 
 .button, .button:visited {
-	border: 1px solid darken(@button-pink, 13%);
-	border-top-color: darken(@button-pink, 7%);
-	border-left-color: darken(@button-pink, 7%);
+	border: 1px solid darken(@prim-color, 13%);
+	border-top-color: darken(@prim-color, 7%);
+	border-left-color: darken(@prim-color, 7%);
 	padding: 4px 12px;
 	color: @white;
 	display: inline-block;
@@ -489,18 +492,18 @@ BUTTONS
 	line-height: 21px;
 	.transition();
 	.border-radius(4px);
-	.css-gradient(@button-pink,darken(@button-pink, 5%));
+	.css-gradient(@prim-color,darken(@prim-color, 5%));
 
 	&:hover, &:focus {
 		color: @white;
-	  border: 1px solid darken(@button-pink, 13%);
-	  border-top-color: darken(@button-pink, 20%);
-	 	border-left-color: darken(@button-pink, 20%);
-		.css-gradient(darken(@button-pink, 5%),darken(@button-pink, 10%));
+	  border: 1px solid darken(@prim-color, 13%);
+	  border-top-color: darken(@prim-color, 20%);
+	 	border-left-color: darken(@prim-color, 20%);
+		.css-gradient(darken(@prim-color, 5%),darken(@prim-color, 10%));
 	}
 	
 	&:active {
-		.css-gradient(darken(@button-pink, 5%),@button-pink);
+		.css-gradient(darken(@prim-color, 5%),@prim-color);
 	}	
 }
 

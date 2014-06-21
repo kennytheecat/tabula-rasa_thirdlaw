@@ -124,6 +124,11 @@ function tr_scripts_and_styles() {
 	
     //adding scripts file in the footer
     wp_register_script( 'tabula_rasa-js', get_stylesheet_directory_uri() . '/js/scripts.js', array( 'jquery' ), '', true );
+
+    //mobile menu
+    wp_register_script( 'mmenu-js', get_stylesheet_directory_uri() . '/js/jquery.mmenu.js', array( 'jquery' ), '', true );
+
+    wp_register_style( 'mmenu-css', get_stylesheet_directory_uri() . '/css/jquery.mmenu.css', array(), '', 'all' );	
 		
 	//dont know if this is styled right
 	//Adds JavaScript for handling the navigation menu hide-and-show behavior.
@@ -132,6 +137,10 @@ function tr_scripts_and_styles() {
 	// dont know is this is styled right
 	//wp_enqueue_script( 'Tabula Rasa-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
+wp_register_script( 'tabula_rasa-cycle', get_stylesheet_directory_uri() . '/js/jquery.cycle.all.js', array( 'jquery' ), '', true );
+
+    wp_enqueue_script( 'mmenu-js' );		
+    wp_enqueue_style( 'mmenu-css' );
     // enqueue styles and scripts
     wp_enqueue_script( 'tabula_rasa-modernizr' );
     wp_enqueue_style( 'tabula_rasa-stylesheet' );
@@ -142,6 +151,9 @@ function tr_scripts_and_styles() {
     // I recommend using a plugin to call jQuery using the google cdn. That way it stays cached and your site will load faster.
     wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'tabula_rasa-js' );
+		if ( is_front_page() ) {
+			wp_enqueue_script( 'tabula_rasa-cycle' );
+		}		
   }
 }
 

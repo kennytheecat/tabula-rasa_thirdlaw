@@ -61,8 +61,10 @@ jQuery(document).ready(function($) {
     var responsive_viewport = $(window).width();
     
     /* if is below 481px */
-    if (responsive_viewport < 481) {
-    
+    if (responsive_viewport < 550) {
+			jQuery(document).ready(function($) {
+				$("#my-menu").mmenu();
+			});     
     } /* end smallest screen */
     
     /* if is larger than 481px */
@@ -71,12 +73,77 @@ jQuery(document).ready(function($) {
     } /* end larger than 481px */
     
     /* if is above or equal to 768px */
-    if (responsive_viewport >= 768) {
-    
-        /* load gravatars */
-        $('.comment img[data-gravatar]').each(function(){
-            $(this).attr('src',$(this).attr('data-gravatar'));
-        });
+    if (responsive_viewport >= 600) {
+			jQuery(function(){
+					jQuery('.site-header').data('size','big');
+			});
+
+			jQuery(window).scroll(function(){
+					if(jQuery(document).scrollTop() > 0)
+					{
+							if(jQuery('.site-header').data('size') == 'big')
+							{
+									jQuery('.site-header').data('size','small');
+									jQuery('.site-header').stop().animate({
+											height:'50px'
+									},600);
+									jQuery('.site-branding .site-title').stop().animate({
+											margin: "-33px 0px 0px 0px"
+									},600);		
+									jQuery('.nav-menu').stop().animate({
+											margin: "-15px 0px 0px 0px"
+									},600);					
+							}
+					}
+					else
+					{
+							if(jQuery('.site-header').data('size') == 'small')
+							{
+									jQuery('.site-header').data('size','big');
+									jQuery('.site-header').stop().animate({
+											height:'170px'
+									},600);
+									jQuery('.site-branding .site-title').stop().animate({
+											margin: "0px 0px 0px 0px"
+									},600);	
+									jQuery('.nav-menu').stop().animate({
+											margin: "55px 0px 0px 0px"
+									},600);						
+							}  
+					}
+			});  
+
+			jQuery(function(){
+					jQuery('.site-main').data('size','big');
+			});
+
+			jQuery(window).scroll(function(){
+					if(jQuery(document).scrollTop() > 0)
+					{
+							if(jQuery('.site-main').data('size') == 'big')
+							{
+									jQuery('.site-main').data('size','small');
+									jQuery('.site-main').stop().animate({
+											margin: "80px auto 0px auto"
+									},600);								
+							}
+					}
+					else
+					{
+							if(jQuery('.site-main').data('size') == 'small')
+							{
+									jQuery('.site-main').data('size','big');
+									jQuery('.site-main').stop().animate({
+											margin: "150px auto 0px auto"
+									},600);								
+							}  
+					}
+			});  	
+			
+			/* load gravatars */
+			$('.comment img[data-gravatar]').each(function(){
+					$(this).attr('src',$(this).attr('data-gravatar'));
+			});
         
     }
     
@@ -97,31 +164,6 @@ c=d.insertBefore(c.lastChild,d.firstChild);b.hasCSS=!!c}g||t(a,b);return a}var k
 var c=f.createDocumentFragment();b="undefined"==typeof c.cloneNode||"undefined"==typeof c.createDocumentFragment||"undefined"==typeof c.createElement}g=b}catch(d){g=j=!0}})();var e={elements:k.elements||"abbr article aside audio bdi canvas data datalist details figcaption figure footer header mark meter nav output progress section summary time video",shivCSS:!1!==k.shivCSS,supportsUnknownElements:g,shivMethods:!1!==k.shivMethods,type:"default",shivDocument:q,createElement:p,createDocumentFragment:function(a,
 b){a||(a=f);if(g)return a.createDocumentFragment();for(var b=b||i(a),c=b.frag.cloneNode(),d=0,e=m(),h=e.length;d<h;d++)c.createElement(e[d]);return c}};l.html5=e;q(f)})(this,document);
 
-/**
- * Theme Customizer enhancements for a better user experience.
- *
- * Contains handlers to make Theme Customizer preview reload changes asynchronously.
- */
-
-( function( $ ) {
-	// Site title and description.
-	wp.customize( 'blogname', function( value ) {
-		value.bind( function( to ) {
-			$( '.site-title a' ).text( to );
-		} );
-	} );
-	wp.customize( 'blogdescription', function( value ) {
-		value.bind( function( to ) {
-			$( '.site-description' ).text( to );
-		} );
-	} );
-	// Header text color.
-	wp.customize( 'header_textcolor', function( value ) {
-		value.bind( function( to ) {
-			$( '.site-title a, .site-description' ).css( 'color', to );
-		} );
-	} );
-} )( jQuery );
 	
 // Skip Link Focus Fix
 ( function() {
@@ -144,39 +186,6 @@ b){a||(a=f);if(g)return a.createDocumentFragment();for(var b=b||i(a),c=b.frag.cl
 	}
 })();
 
-/**
- *navigation.js
- *
- * Handles toggling the navigation menu for small screens.
- */
-( function() {
-	var container = document.getElementById( 'site-navigation' ),
-	    button    = container.getElementsByTagName( 'h1' )[0],
-	    menu      = container.getElementsByTagName( 'ul' )[0];
-
-	if ( undefined == button || undefined == menu )
-		return false;
-
-	button.onclick = function() {
-		if ( -1 == menu.className.indexOf( 'nav-menu' ) )
-			menu.className = 'nav-menu';
-
-		if ( -1 != button.className.indexOf( 'toggled-on' ) ) {
-			button.className = button.className.replace( ' toggled-on', '' );
-			menu.className = menu.className.replace( ' toggled-on', '' );
-			container.className = container.className.replace( 'main-small-navigation', 'navigation-main' );
-		} else {
-			button.className += ' toggled-on';
-			menu.className += ' toggled-on';
-			container.className = container.className.replace( 'navigation-main', 'main-small-navigation' );
-		}
-	};
-
-	// Hide menu toggle button if menu is empty.
-	if ( ! menu.childNodes.length )
-		button.style.display = 'none';
-} )();
-
 // Keyboard Image Navigation
 jQuery( document ).ready( function( $ ) {
 	$( document ).keydown( function( e ) {
@@ -194,39 +203,3 @@ jQuery( document ).ready( function( $ ) {
 } );
  
 }); /* end of as page load scripts */
-
-
-/*! A fix for the iOS orientationchange zoom bug.
- Script by @scottjehl, rebound by @wilto.
- MIT License.
-*/
-(function(w){
-	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
-	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ){ return; }
-    var doc = w.document;
-    if( !doc.querySelector ){ return; }
-    var meta = doc.querySelector( "meta[name=viewport]" ),
-        initialContent = meta && meta.getAttribute( "content" ),
-        disabledZoom = initialContent + ",maximum-scale=1",
-        enabledZoom = initialContent + ",maximum-scale=10",
-        enabled = true,
-		x, y, z, aig;
-    if( !meta ){ return; }
-    function restoreZoom(){
-        meta.setAttribute( "content", enabledZoom );
-        enabled = true; }
-    function disableZoom(){
-        meta.setAttribute( "content", disabledZoom );
-        enabled = false; }
-    function checkTilt( e ){
-		aig = e.accelerationIncludingGravity;
-		x = Math.abs( aig.x );
-		y = Math.abs( aig.y );
-		z = Math.abs( aig.z );
-		// If portrait orientation and in one of the danger zones
-        if( !w.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ){
-			if( enabled ){ disableZoom(); } }
-		else if( !enabled ){ restoreZoom(); } }
-	w.addEventListener( "orientationchange", restoreZoom, false );
-	w.addEventListener( "devicemotion", checkTilt, false );
-})( this );

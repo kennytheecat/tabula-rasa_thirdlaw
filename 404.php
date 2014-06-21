@@ -6,10 +6,9 @@
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
-
 get_header(); ?>
 
-	<section id="primary" class="content-area">
+	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
 			<article id="post-0" class="post error404 no-results not-found">
@@ -26,4 +25,5 @@ get_header(); ?>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

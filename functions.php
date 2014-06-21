@@ -79,6 +79,7 @@ MISC
 	 - remove_default_post_formats()
 	 - Google Analytics
 ------------------------------------------------------------------*/
+require_once('inc/functions-widgets.php'); 
 
 require_once('inc/functions-admin.php'); 
 /*------------------------------------------------------------------
@@ -110,7 +111,7 @@ HELP PAGE
 	-  my_help_menu
 ------------------------------------------------------------------*/
 
-//require_once('inc/custom-post-type.php'); 
+require_once('inc/custom-post-type.php'); 
 /*------------------------------------------------------------------
 CUSTOM POST TYPES
 	- Construction Post Type
@@ -123,7 +124,7 @@ Posts 2 Posts
 		// Associates construction posts to construction post types
 ------------------------------------------------------------------*/
 
-//require_once('inc/metabox/metabox-functions.php'); 
+require_once('inc/metabox/metabox-functions.php'); 
 
 
 //require_once('inc/theme-options.php');
@@ -151,11 +152,10 @@ THEME SUPPORT
 /** Google Fonts
 **************************************************************/
 function tr_theme_specific_scripts_and_styles() {
-wp_register_style( 'google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300|Open+Sans+Condensed:700|Old+Standard+TT:400,700');
+wp_register_style( 'google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300|Open+Sans+Condensed:700|Alfa+Slab+One|Changa+One|Luckiest+Guy');
 wp_enqueue_style( 'google-fonts' );
 }
 add_action('wp_enqueue_scripts', 'tr_theme_specific_scripts_and_styles', 999);
-
 
 /*************************************************************
 THEME SUPPORT
@@ -166,9 +166,9 @@ function tr_theme_specific_support() {
 	set_post_thumbnail_size(150, 150, true);
 
 	if ( function_exists( 'add_image_size' ) ) { 
-		add_image_size( 'featured-home', 500, 250, true ); //500 pixels wide 
-		add_image_size( 'featured-destination', 300, 280, true ); //300 pixels wide 
-		add_image_size( 'page-banner', 640, 150, true ); //640 pixels wide 
+		add_image_size( 'slider', 500, 999, false ); //500 pixels wide 
+		add_image_size( 'home-blog1', 200, 100, true ); //300 pixels wide 
+		add_image_size( 'home-blog2', 320, 150, array( 'center', 'top' ) ); //640 pixels wide 
 	}	
 }	
 add_action('after_setup_theme','tr_theme_specific_support', 16);

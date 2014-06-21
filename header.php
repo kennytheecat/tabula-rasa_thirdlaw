@@ -46,21 +46,13 @@
 	<header id="masthead" class="site-header" role="banner">
 		<div class="inner-header">
 			<div class="site-branding">
+				<a href="#my-menu" class="mobile-menu"><img src="<?php echo bloginfo('template_url'); ?>/images/navicon_20.png" /></a>
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<!--<h1 class="logo"><img src="<?php echo bloginfo('template_url'); ?>/images/logo.png" alt="" /></h1> -->
-				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-			</div>
-
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-			<h3 class="menu-toggle"><?php _e( 'Menu', 'tabula_rasa' ); ?></h3>
-			<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'tabula_rasa' ); ?>"><?php _e( 'Skip to content', 'tabula_rasa' ); ?></a>
+			</div>				
+			<nav id="my-menu" class="main-navigation" role="navigation">
 				<?php tr_main_nav(); ?>
-			</nav><!-- #site-navigation -->
-
-			<?php $header_image = get_header_image();
-			if ( ! empty( $header_image ) ) : ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" /></a>
-			<?php endif; ?>
+			</nav><!-- #site-navigation -->	
+			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>			
 		</div>
 	</header><!-- #masthead -->
 

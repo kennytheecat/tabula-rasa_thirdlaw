@@ -17,7 +17,8 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
+		<div id="content" class="site-content" role="main"> 
+			<h3 class="archive-title">Articles</h3
 		<?php if ( have_posts() ) : ?>
 
 			<?php /* Start the Loop */ ?>
