@@ -5,6 +5,7 @@
 <!--[if (IE 8)&!(IEMobile)]><html <?php language_attributes(); ?> class="no-js lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--> <html <?php language_attributes(); ?> class="no-js"><!--<![endif]-->
 
+
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 

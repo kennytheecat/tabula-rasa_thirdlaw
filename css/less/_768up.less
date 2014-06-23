@@ -196,6 +196,7 @@ ins {}
 abbr,
 dfn,
 acronym {}
+
 	
 /******************************************************************
 HEADER & NAVIGATION
@@ -573,24 +574,93 @@ STANDARD PAGES
 		left: 50px;
 	}	
 }
+@-moz-keyframes quotesPizazz {
+	0%   { 
+		opacity: 0; 
+		left: 0;
+	}
+	100% { 
+		opacity: 1; 
+		left: 50px;
+	}	
+}
+@-o-keyframes quotesPizazz {
+	0%   { 
+		opacity: 0; 
+		left: 0;
+	}
+	100% { 
+		opacity: 1; 
+		left: 50px;
+	}	
+}
+@keyframes quotesPizazz {
+	0%   { 
+		opacity: 0; 
+		left: 0;
+	}
+	100% { 
+		opacity: 1; 
+		left: 50px;
+	}	
+}
 .quotesPizazz {
-	-webkit-animation-name: quotesPizazz;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count: 1;
-	-webkit-animation-direction: alternate;
-	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-fill-mode: forwards;
-	-webkit-animation-delay: .25s;				
+  -webkit-animation: quotesPizazz 2s 1 alternate ease-out forwards; /* Safari 4+ */
+  -moz-animation:    quotesPizazz 2s 1 alternate ease-out forwards; /* Fx 5+ */
+  -o-animation:      quotesPizazz 2s 1 alternate ease-out forwards; /* Opera 12+ */
+  animation:         quotesPizazz 2s 1 alternate ease-out forwards; /* IE 10+ */
 }	
 
 @-webkit-keyframes quotesAuthorPizazz {
+
+	60% {
+		font-size: 30px;
+		color: @black;
+	}
+	100% {
+		color: @white;
+	}		
+}
+@-moz-keyframes quotesAuthorPizazz {
 	0%   { 
 		left: 0;
 	}
 	60% {
 		left: -50px;
 	}	
-	80% {
+	60% {
+		left: -50px;
+		color: @black;
+	}
+	100% {
+		left: -50px;
+		color: @white;
+	}		
+}
+@-o-keyframes quotesAuthorPizazz {
+	0%   { 
+		left: 0;
+	}
+	60% {
+		left: -50px;
+	}	
+	60% {
+		left: -50px;
+		color: @black;
+	}
+	100% {
+		left: -50px;
+		color: @white;
+	}		
+}
+@keyframes quotesAuthorPizazz {
+	0%   { 
+		left: 0;
+	}
+	60% {
+		left: -50px;
+	}	
+	60% {
 		left: -50px;
 		color: @black;
 	}
@@ -600,13 +670,10 @@ STANDARD PAGES
 	}		
 }
 .quotesAuthorPizazz {
-	-webkit-animation-name: quotesAuthorPizazz;
-	-webkit-animation-duration: 2s;
-	-webkit-animation-iteration-count: 1;
-	-webkit-animation-direction: alternate;
-	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-fill-mode: forwards;
-	-webkit-animation-delay: .25s;				
+  -webkit-animation: quotesAuthorPizazz 2s .5s 1 alternate ease-out forwards; /* Safari 4+ */
+  -moz-animation:    quotesAuthorPizazz 2s .5s 1 alternate ease-out forwards; /* Fx 5+ */
+  -o-animation:      quotesAuthorPizazz 2s .5s 1 alternate ease-out forwards; /* Opera 12+ */
+  animation:         quotesAuthorPizazz 2s .5s 1 alternate ease-out forwards; /* IE 10+ */	
 }	
 
 @-webkit-keyframes pizazz{
@@ -619,14 +686,41 @@ STANDARD PAGES
 		top: 0px;
 	}	
 }
+@-moz-keyframes pizazz{
+	0%   { 
+		opacity: 0; 
+		top: -25px;
+	}
+	100% { 
+		opacity: 1; 
+		top: 0px;
+	}	
+}
+@-o-keyframes pizazz{
+	0%   { 
+		opacity: 0; 
+		top: -25px;
+	}
+	100% { 
+		opacity: 1; 
+		top: 0px;
+	}	
+}
+@keyframes pizazz{
+	0%   { 
+		opacity: 0; 
+		top: -25px;
+	}
+	100% { 
+		opacity: 1; 
+		top: 0px;
+	}	
+}
 .pizazz {
-	-webkit-animation-name: pizazz;
-	-webkit-animation-duration: 1s;
-	-webkit-animation-iteration-count: 1;
-	-webkit-animation-direction: alternate;
-	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-fill-mode: forwards;
-	-webkit-animation-delay: .25s;				
+  -webkit-animation: pizazz 2s .5s 1 alternate ease-out forwards; /* Safari 4+ */
+  -moz-animation:    pizazz 2s .5s 1 alternate ease-out forwards; /* Fx 5+ */
+  -o-animation:      pizazz 2s .5s 1 alternate ease-out forwards; /* Opera 12+ */
+  animation:         pizazz 2s .5s 1 alternate ease-out forwards; /* IE 10+ */	
 }		
 				
 /** Home 
