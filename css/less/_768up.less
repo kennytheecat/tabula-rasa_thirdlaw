@@ -87,7 +87,7 @@ body {}
 .site-main {
 	clear: both;
 	.wrap;
-	.margin-top(150px);
+	.margin-top(140px);
 	
 	.content-area {
 		.column(8);
@@ -232,7 +232,7 @@ header#masthead .site-header
 			margin: 0 auto 0;
 			right: 0;
 			left: 0;
-			.height(120px);
+			.height(90px);
 					
 			a { 
 				color: @white;
@@ -244,7 +244,7 @@ header#masthead .site-header
 				}				
 			} 
 			.site-title {
-				.font-size(50px);
+				.font-size(40px);
 				.line-height(45px);
 				color: @white;
 				text-shadow: 3px 3px 3px @black;
@@ -290,6 +290,7 @@ header#masthead .site-header
 	.column(8);
 	.last;
 	width: 100%;
+	.margin-top(-30px);
 	.screen-reader-text {}
 	.skip-link {}
 } /* end .main-navigation */
@@ -309,7 +310,7 @@ header#masthead .site-header
 		position: relative;
 		display: inline-block;
 		text-decoration: none;
-		.padding(10px, 15px);
+		.padding(10px, 10px);
 		.font-size(24px);
 		
 		&:hover, &:focus { 
@@ -694,6 +695,7 @@ STANDARD PAGES
 					.padding(20px);
 					.column(6);
 					.last;
+					width: 47%;
 					
 					.entry-title {
 						color: @white;
@@ -729,7 +731,7 @@ STANDARD PAGES
 		.inner-main-quote {
 			.wrap;
 			position: absolute;
-			.top(50px);
+			.top(30px);
 			left: 0;
 			right: 0;
 			.font-size(25px);
@@ -739,6 +741,7 @@ STANDARD PAGES
 			.quote {
 				position: relative;
 				.column(12);
+				width: 90%;
 			}
 			.quote-author {
 				position: relative;
@@ -753,7 +756,10 @@ STANDARD PAGES
 		.blurb {
 			.column(4);
 			&:nth-of-type(1) { .first; }
-			&:nth-of-type(3) { .last; }
+			&:nth-of-type(3) { 
+				.column(4);
+				.last; 
+			}
 			h2 {
 
 			}
@@ -763,6 +769,7 @@ STANDARD PAGES
 				.padding(0,20px);
 			}
 			&:nth-of-type(2) {
+				.column(4);
 				border-left: 1px solid #999;
 				border-right: 1px solid #999;
 				.padding(10px);
@@ -1077,6 +1084,7 @@ FOOTER STYLES
 ******************************************************************/
 .site-footer {
 	margin: 0;
+	.padding(0, 10px);
 	background: @prim-color;
 	
 	.inner-footer {

@@ -1,0 +1,329 @@
+/******************************************************************
+LAYOUT & GRID STYLES
+******************************************************************/
+/* Page Structure
+-------------------------------------------------------------- */
+/*
+body
+	#page .site
+		> header#masthead .site-header
+		+ #main .site-main
+			>#primary .content-area
+				>#content .site-content
+					>article
+			+#secondary .widget-area .aside1
+			+.widget-area .aside2
+		+footer#colophon .site-footer
+-------------------------------------------------------------- */
+html {}
+body {}
+.wrap {
+	.max-width(1000px);
+	margin: 0 auto 0;
+}
+.site {
+	box-shadow: 1px 1px 10px #ccc;
+	overflow: hidden;
+	background: @sec-color; // url (../images/bg.png) repeat;
+	background: @white;
+}	
+.site-header {
+	background: @prim-color;
+	box-shadow: 1px 1px 1px 1px @black;
+	overflow: hidden;
+	height: auto;
+	padding: 0;
+	position: relative;
+	
+}
+.site-main {
+	clear: both;
+	.wrap;
+	.margin-top(110px);
+	
+	.content-area {
+	
+		.site-content {
+			margin: 0;
+		}
+	}
+	
+	.widget-area {		
+		.aside1 {}
+		.aside2 {}
+	}
+}
+.site-footer {}
+
+/******************************************************************
+HEADER & NAVIGATION
+******************************************************************/
+
+/** Site Header
+-------------------------------------------------------------- */
+/** 
+header#masthead .site-header
+	.inner-header
+		.site-branding
+			h1.site-title
+			h2.site-description
+		nav#site-navigation .main-navigation	
+-------------------------------------------------------------- */
+.site-header {
+	.height(110px);
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	
+	.inner-header {
+		//position: relative;
+		.margin-top(10px);
+		
+		.site-branding {
+			.column(4);
+			.first;
+			text-align: center;
+			background: @prim-color url('../images/gear_150.png') no-repeat;
+			background: @prim-color;
+			position: absolute;
+			margin: 0 auto 0;
+			right: 0;
+			left: 0;
+			.height(60px);
+			//.margin-top(-55px);
+					
+			a { 
+				color: @white;
+				//text-shadow: 1px 1px 1px @black;
+				
+				&:hover { 
+					color: @white;
+					//text-shadow: 1px 1px 1px @black;
+				}				
+			} 
+			.site-title {
+				.font-size(30px);
+				.line-height(30px);
+				color: @white;
+				text-shadow: 3px 3px 3px @black;
+				//.margin-top(20px);
+				font-family: "Changa One";
+				display: block;
+			}			
+			.header-image {}
+			.mobile-menu {
+				display: none;
+				
+				img {
+					display: none;
+				}
+			}
+		}		
+			.site-description {
+				.font-size(20px);
+				color: @white;
+				text-shadow: 2px 2px 2px @black;
+				font-family: @sans-serif;
+				display: block;
+				background-color: @prim-color;
+				text-align: center;				
+			}		
+	}
+}
+
+/** Navigation
+-------------------------------------------------------------- */
+/*
+header#masthead .site-header
+	.inner-header
+		.site-branding
+		nav#site-naviagtion .main-navigation
+			h3.menu-toggle
+			.asssitive-text
+			nav.menu
+				ul
+					li.page-item
+						a
+-------------------------------------------------------------- */
+.menu-toggle {
+	display: none;
+}
+.main-navigation {
+	.column(8);
+	.last;
+	width: 100%;
+	.screen-reader-text {}
+	.skip-link {}
+} /* end .main-navigation */
+.nav-menu {
+	display: inline-block !important;
+	text-align: left;
+	width: 100%;		
+	margin: 0;
+	text-indent: 0;
+	border-bottom: 2px dashed #444;
+	border-top: 2px dashed #444;
+	.margin-top(15px);	
+	.padding-left(15px);
+	
+	li {
+		margin: 0;
+		.margin-right(20px);
+		position: relative;
+		display: inline-block;
+		text-decoration: none;
+		.padding(5px, 5px);
+		.font-size(16px);
+		
+		&:hover, &:focus { 
+		}		
+		a {
+			border-bottom: 0;
+			color: @white;
+			white-space: nowrap;
+			display: inline-block;
+			text-decoration: none;	
+			
+			&:hover, &:focus { 
+				color: @tert-color; 
+			}
+		}
+		&:first-child {}
+		&:last-child {}
+		.sub-menu,
+		.children {
+			display: none;
+			
+			li {
+				margin: 0;
+				padding: 0;
+				
+				a {
+					background: #fff;
+					border-bottom: 2px solid #222;
+					.font-size(11px);
+					.padding(8px, 10px);
+					.width(180px);
+					
+					&:hover,
+					&:focus {
+						background: #e3e3e3;
+						color: @black;
+					}
+					&:link {}
+				}
+				&:first-child {}
+				&:last-child {}
+			}
+		}
+		&:hover ul {  
+			position: absolute;
+			display: inline-block;
+			.margin-left(-45px);
+			.padding-top(2px);
+		}
+		&:nth-of-type(1),
+		&:nth-of-type(2) {
+			float: left;
+		}
+		&:nth-of-type(3),
+		&:nth-of-type(4) {
+			float: right;
+		}		
+	} /* end .nav-menu li */
+	/* highlight current page */
+	li.current-menu-item,
+	li.current_page_item,
+	li.current_page_ancestor {
+		a {}
+	}  /* end current highlighters */			
+} /* end .nav-menu ul */
+
+#menu-item-62,
+#menu-item-142 {
+	float: left;
+}
+#menu-item-328,
+#menu-item-63 {
+	float: right;
+}
+
+.home {
+	.blurbs {
+		overflow: hidden;
+		
+		.blurb {
+			&:nth-of-type(2),
+			&:nth-of-type(3) {
+				.column(6);
+				
+				p {
+					.padding(0, 5px);
+				}
+			}
+			&:nth-of-type(2) {
+				.first; 
+			}
+			&:nth-of-type(3) {
+				.last;
+			}		
+		}
+	}
+
+	.blog-wordpress, 
+	.blog-prescott {
+		article {
+			.entry-thumbnail {
+				width: auto;
+			}
+			.entry-content {
+				clear: none;
+			}
+		}
+	}
+}
+
+
+/******************************************************************
+FOOTER STYLES
+******************************************************************/
+.site-footer {
+	margin: 0;
+	background: @prim-color;
+	
+	.inner-footer {
+		.wrap;
+	}
+	.entry-meta {}
+	a {
+		&:hover { color: @link-hover; }
+	}
+	ul {
+		li {
+			a {}
+			&:first-child {}
+			&:last-child {}
+		}
+	}
+	p.mobile {
+		display: none;
+	}
+	.site-info {
+		overflow: hidden;
+		.padding-top(5px);
+		
+		.site-title {
+			display: none;
+			
+			a:hover {
+				color: @white;
+			}
+		}
+		.site-description {
+			font-family: @sans-serif;
+			.font-size(20px);
+			display: block;
+			text-align: center;
+		}
+	}
+}

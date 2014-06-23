@@ -14,86 +14,37 @@ so you still want to keep it pretty light and simply expand
 upon your base.less styles.
 
 ******************************************************************/
-	
-/*********************
-NAVIGATION STYLES
-*********************/
-.main-navigation {
-	.screen-reader-text {}
-	.skip-link {}
-	/* .menu is clearfixed inside mixins.scss */
-	.nav-menu {
-		ul {
-			li {
-				a {					
-					/*
-					you can use hover styles here even though this size
-					has the possibility of being a mobile device.
-					*/
-					&:hover, &:focus {					
-					}
-				}				
-				&:first-child {}
-				&:last-child {}
-				/* plan your menus and drop-downs wisely. */
-				ul.sub-menu,
-				ul.children {
-					li {
-						a {
-							&:hover,
-							&:focus {}
-							&:link {}
-						}
-						&:first-child {}
-						&:last-child {}
-					}
+.home {
+	.blurbs {
+		overflow: hidden;
+		
+		.blurb {
+			&:nth-of-type(2),
+			&:nth-of-type(3) {
+				.column(6);
+				
+				p {
+					.padding(0, 5px);
 				}
-			} /* end .nav-menu li */
-			/* highlight current page */
-			li.current-menu-item, 
-			li.current_page_item,
-			li.current-page-ancestor {
-				a {}
-			}  /* end current highlighters */
-		} /* end .nav-menu ul */
-	} /* end .nav-menu */
-} /* end .main-navigation */
-
-/*********************
-POSTS & CONTENT STYLES
-*********************/
-
-/* entry content */
-.entry-content {
-	/* at this larger size, we can start to align images */
-	.alignleft, img.alignleft { 
-		margin-right: 1.5em; 
-		display: inline; 
-		float: left; 
+			}
+			&:nth-of-type(2) {
+				.first; 
+			}
+			&:nth-of-type(3) {
+				.last;
+			}		
+		}
 	}
-	.alignright, img.alignright { 
-		margin-left: 1.5em; 
-		display: inline; 
-		float: right; 
-	}
-	.aligncenter, img.aligncenter { 
-		margin-right: auto; 
-		margin-left: auto; 
-		display: block; 
-		clear: both; 
-	}	
-} /* end .entry-content */
 
-/*********************
-FOOTER STYLES
-*********************/
-	
-/*
-check your menus here. do they look good?
-do they need tweaking?
-*/
-.footer-links {
-	ul {
-		li {}
+	.blog-wordpress, 
+	.blog-prescott {
+		article {
+			.entry-thumbnail {
+				width: auto;
+			}
+			.entry-content {
+				clear: none;
+			}
+		}
 	}
-} /* end .footer-links */
+}

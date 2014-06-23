@@ -70,6 +70,7 @@
 
 var win = jQuery(window);
 
+/*
 var siteHeader = jQuery(".site-header");
 siteHeader.each(function(i, el) {
   var el = jQuery(el);
@@ -86,6 +87,7 @@ win.scroll(function(event) {
     } 
   });
 });
+*/
 
 var allMods = jQuery(".blurb img");
 allMods.each(function(i, el) {

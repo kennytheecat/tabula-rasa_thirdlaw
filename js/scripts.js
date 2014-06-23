@@ -1,161 +1,261 @@
 /*
-Bones Scripts File
-Author: Eddie Machado
-
-This file should contain any js scripts you want to add to the site.
-Instead of calling it in the header or throwing it inside wp_head()
-this file will be called automatically in the footer so as not to
-slow the page load.
-
-Table of Contents
-- IE8 ployfill for GetComputed Style (for Responsive Script below)
-- Responsive Query Section
-	-  if is below 481px 
-	- if is larger than 481px 
-	- if is above or equal to 768px 
-		- load gravatars 
-	- if larger than 1030px
-	- add all your scripts here
-		- html5.js
-			// html5 shiv
-		- customizer.js
-			// Theme Customizer enhancements for a better user experience.
-		- keyboard-image-navigation.js
-			// Keyboard Image Navigation
-		- skip-link-focus-fix.js
-			// Skip Link Focus Fix
-		- navigation.js
-			// Handles toggling the navigation menu for small screens.
-- A fix for the iOS orientationchange zoom bug
+ * Bones Scripts File
+ * Author: Eddie Machado
+ *
+ * This file should contain any js scripts you want to add to the site.
+ * Instead of calling it in the header or throwing it inside wp_head()
+ * this file will be called automatically in the footer so as not to
+ * slow the page load.
+ *
+ * There are a lot of example functions and tools in here. If you don't
+ * need any of it, just remove it. They are meant to be helpers and are
+ * not required. It's your world baby, you can do whatever you want.
 */
 
-// IE8 ployfill for GetComputed Style (for Responsive Script below)
-if (!window.getComputedStyle) {
-    window.getComputedStyle = function(el, pseudo) {
-        this.el = el;
-        this.getPropertyValue = function(prop) {
-            var re = /(\-([a-z]){1})/g;
-            if (prop == 'float') prop = 'styleFloat';
-            if (re.test(prop)) {
-                prop = prop.replace(re, function () {
-                    return arguments[2].toUpperCase();
-                });
-            }
-            return el.currentStyle[prop] ? el.currentStyle[prop] : null;
-        }
-        return this;
-    }
+
+/*
+ * Get Viewport Dimensions
+ * returns object with viewport dimensions to match css in width and height properties
+ * ( source: http://andylangton.co.uk/blog/development/get-viewport-size-width-and-height-javascript )
+*/
+function updateViewportDimensions() {
+	var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;
+	return { width:x,height:y }
+}
+// setting the viewport width
+var viewport = updateViewportDimensions();
+
+
+/*
+ * Throttle Resize-triggered Events
+ * Wrap your actions in this function to throttle the frequency of firing them off, for better performance, esp. on mobile.
+ * ( source: http://stackoverflow.com/questions/2854407/javascript-jquery-window-resize-how-to-fire-after-the-resize-is-completed )
+*/
+var waitForFinalEvent = (function () {
+	var timers = {};
+	return function (callback, ms, uniqueId) {
+		if (!uniqueId) { uniqueId = "Don't call this twice without a uniqueId"; }
+		if (timers[uniqueId]) { clearTimeout (timers[uniqueId]); }
+		timers[uniqueId] = setTimeout(callback, ms);
+	};
+})();
+
+// how long to wait before deciding the resize has stopped, in ms. Around 50-100 should work ok.
+var timeToWaitForLast = 100;
+
+
+/*
+ * Here's an example so you can see how we're using the above function
+ *
+ * This is commented out so it won't work, but you can copy it and
+ * remove the comments.
+ *
+ *
+ *
+ * If we want to only do it on a certain page, we can setup checks so we do it
+ * as efficient as possible.
+ *
+ * if( typeof is_home === "undefined" ) var is_home = $('body').hasClass('home');
+ *
+ * This once checks to see if you're on the home page based on the body class
+ * We can then use that check to perform actions on the home page only
+ *
+ * When the window is resized, we perform this function
+ * $(window).resize(function () {
+ *
+ *    // if we're on the home page, we wait the set amount (in function above) then fire the function
+ *    if( is_home ) { waitForFinalEvent( function() {
+ *
+ *      // if we're above or equal to 768 fire this off
+ *      if( viewport.width >= 768 ) {
+ *        console.log('On home page and window sized to 768 width or more.');
+ *      } else {
+ *        // otherwise, let's do this instead
+ *        console.log('Not on home page, or window sized to less than 768.');
+ *      }
+ *
+ *    }, timeToWaitForLast, "your-function-identifier-string"); }
+ * });
+ *
+ * Pretty cool huh? You can create functions like this to conditionally load
+ * content and other stuff dependent on the viewport.
+ * Remember that mobile devices and javascript aren't the best of friends.
+ * Keep it light and always make sure the larger viewports are doing the heavy lifting.
+ *
+*/
+
+/*
+ * We're going to swap out the gravatars.
+ * In the functions.php file, you can see we're not loading the gravatar
+ * images on mobile to save bandwidth. Once we hit an acceptable viewport
+ * then we can swap out those images since they are located in a data attribute.
+*/
+function loadGravatars() {
+  // set the viewport using the function above
+  viewport = updateViewportDimensions();
+  // if the viewport is tablet or larger, we load in the gravatars
+  if (viewport.width >= 768) {
+  jQuery('.comment img[data-gravatar]').each(function(){
+    jQuery(this).attr('src',jQuery(this).attr('data-gravatar'));
+  });
+	}
+} // end function
+
+if ( viewport.width < 600 ) {
+	jQuery(document).ready(function($) {
+		$("#my-menu").mmenu();
+	}); 
 }
 
-// as the page loads, call these scripts
-jQuery(document).ready(function($) {
+if ( viewport.width >= 600 &&  viewport.width < 768 ) {
+	jQuery(function(){
+		jQuery('.site-header').data('size','big');
+	});
 
-    /*
-    Responsive jQuery is a tricky thing.
-    There's a bunch of different ways to handle
-    it, so be sure to research and find the one
-    that works for you best.
-    */
-    
-    /* getting viewport width */
-    var responsive_viewport = $(window).width();
-    
-    /* if is below 481px */
-    if (responsive_viewport < 550) {
-			jQuery(document).ready(function($) {
-				$("#my-menu").mmenu();
-			});     
-    } /* end smallest screen */
-    
-    /* if is larger than 481px */
-    if (responsive_viewport > 481) {
-        
-    } /* end larger than 481px */
-    
-    /* if is above or equal to 768px */
-    if (responsive_viewport >= 600) {
-			jQuery(function(){
-					jQuery('.site-header').data('size','big');
-			});
-
-			jQuery(window).scroll(function(){
-					if(jQuery(document).scrollTop() > 0)
-					{
-							if(jQuery('.site-header').data('size') == 'big')
-							{
-									jQuery('.site-header').data('size','small');
-									jQuery('.site-header').stop().animate({
-											height:'50px'
-									},600);
-									jQuery('.site-branding .site-title').stop().animate({
-											margin: "-33px 0px 0px 0px"
-									},600);		
-									jQuery('.nav-menu').stop().animate({
-											margin: "-15px 0px 0px 0px"
-									},600);					
-							}
-					}
-					else
-					{
-							if(jQuery('.site-header').data('size') == 'small')
-							{
-									jQuery('.site-header').data('size','big');
-									jQuery('.site-header').stop().animate({
-											height:'170px'
-									},600);
-									jQuery('.site-branding .site-title').stop().animate({
-											margin: "0px 0px 0px 0px"
-									},600);	
-									jQuery('.nav-menu').stop().animate({
-											margin: "55px 0px 0px 0px"
-									},600);						
-							}  
-					}
-			});  
-
-			jQuery(function(){
-					jQuery('.site-main').data('size','big');
-			});
-
-			jQuery(window).scroll(function(){
-					if(jQuery(document).scrollTop() > 0)
-					{
-							if(jQuery('.site-main').data('size') == 'big')
-							{
-									jQuery('.site-main').data('size','small');
-									jQuery('.site-main').stop().animate({
-											margin: "80px auto 0px auto"
-									},600);								
-							}
-					}
-					else
-					{
-							if(jQuery('.site-main').data('size') == 'small')
-							{
-									jQuery('.site-main').data('size','big');
-									jQuery('.site-main').stop().animate({
-											margin: "150px auto 0px auto"
-									},600);								
-							}  
-					}
-			});  	
-			
-			/* load gravatars */
-			$('.comment img[data-gravatar]').each(function(){
-					$(this).attr('src',$(this).attr('data-gravatar'));
-			});
-        
-    }
-    
-    /* off the bat large screen actions */
-    if (responsive_viewport > 1030) {
-        
-    }
-    
+	jQuery(window).scroll(function(){
+		if(jQuery(document).scrollTop() > 0) {
+			if(jQuery('.site-header').data('size') == 'big') {
+				jQuery('.site-header').data('size','small');
+				jQuery('.site-header').stop().animate({
+					height:'3rem'
+				},600);
+				jQuery('.site-branding .site-title').stop().animate({
+					margin: "-1rem 0rem 0rem 0rem"
+				},600);	
+				jQuery('.main-navigation').stop().animate({
+					margin: "-3rem 0rem 0rem 0rem"
+				},600);	
+				/*
+				jQuery('.nav-menu').stop().animate({
+					},600);					
+				*/
+			}
+		} else {
+			if(jQuery('.site-header').data('size') == 'small') {
+				jQuery('.site-header').data('size','big');
+				jQuery('.site-header').stop().animate({
+					height:'11rem'
+				},600);
+				jQuery('.site-branding .site-title').stop().animate({
+					margin: "0rem 0rem 0rem 0rem"
+				},600);	
+				jQuery('.main-navigation').stop().animate({
+					margin: "0rem 0rem 0rem 0rem"
+				},600);
+				/*
+				jQuery('.nav-menu').stop().animate({
+					},600);
+				*/
+			}  
+		}
+	}); 
 	
+	jQuery(function(){
+		jQuery('.site-main').data('size','big');
+	});
+
+	jQuery(window).scroll(function(){
+		if(jQuery(document).scrollTop() > 0) {
+			if(jQuery('.site-main').data('size') == 'big') {
+				jQuery('.site-main').data('size','small');
+				jQuery('.site-main').stop().animate({
+					margin: "3rem auto 0rem auto"
+				},600);								
+			}
+		} else {
+			if(jQuery('.site-main').data('size') == 'small') {
+				jQuery('.site-main').data('size','big');
+				jQuery('.site-main').stop().animate({
+					margin: "11rem auto 0rem auto"
+				},600);								
+			}  
+		}
+	});  
+	
+}
+
+if ( viewport.width >= 768 ) {
+	jQuery(function(){
+		jQuery('.site-header').data('size','big');
+	});
+
+	jQuery(window).scroll(function(){
+		if(jQuery(document).scrollTop() > 0) {
+			if(jQuery('.site-header').data('size') == 'big') {
+				jQuery('.site-header').data('size','small');
+				jQuery('.site-header').stop().animate({
+					height:'5rem'
+				},600);
+				jQuery('.site-branding .site-title').stop().animate({
+					margin: "-1rem 0rem 0rem 0rem"
+				},600);	
+				jQuery('.main-navigation').stop().animate({
+					margin: "-7rem 0rem 0rem 0rem"
+				},600);	
+				/*
+				jQuery('.nav-menu').stop().animate({
+					},600);					
+				*/
+			}
+		} else {
+			if(jQuery('.site-header').data('size') == 'small') {
+				jQuery('.site-header').data('size','big');
+				jQuery('.site-header').stop().animate({
+					height:'15rem'
+				},600);
+				jQuery('.site-branding .site-title').stop().animate({
+					margin: "0rem 0rem 0rem 0rem"
+				},600);	
+				jQuery('.main-navigation').stop().animate({
+					margin: "-3rem 0rem 0rem 0rem"
+				},600);
+				/*
+				jQuery('.nav-menu').stop().animate({
+					},600);
+				*/
+			}  
+		}
+	}); 
+	
+	jQuery(function(){
+		jQuery('.site-main').data('size','big');
+	});
+
+	jQuery(window).scroll(function(){
+		if(jQuery(document).scrollTop() > 0) {
+			if(jQuery('.site-main').data('size') == 'big') {
+				jQuery('.site-main').data('size','small');
+				jQuery('.site-main').stop().animate({
+					margin: "7rem auto 0rem auto"
+				},600);								
+			}
+		} else {
+			if(jQuery('.site-main').data('size') == 'small') {
+				jQuery('.site-main').data('size','big');
+				jQuery('.site-main').stop().animate({
+					margin: "14rem auto 0rem auto"
+				},600);								
+			}  
+		}
+	});
+	
+}	
+/*
+ * Put all your regular jQuery in here.
+*/
+
 /**********************
 add all your scripts here
 ***********************/
+
+jQuery(document).ready(function($) {
+
+  /*
+   * Let's fire off the gravatar function
+   * You can remove this if you don't need it
+  */
+  loadGravatars();
+
 
 /*! HTML5 Shiv v3.6 stable | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed */
 (function(l,f){function m(){var a=e.elements;return"string"==typeof a?a.split(" "):a}function i(a){var b=n[a[o]];b||(b={},h++,a[o]=h,n[h]=b);return b}function p(a,b,c){b||(b=f);if(g)return b.createElement(a);c||(c=i(b));b=c.cache[a]?c.cache[a].cloneNode():r.test(a)?(c.cache[a]=c.createElem(a)).cloneNode():c.createElem(a);return b.canHaveChildren&&!s.test(a)?c.frag.appendChild(b):b}function t(a,b){if(!b.cache)b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag();
@@ -201,5 +301,5 @@ jQuery( document ).ready( function( $ ) {
 		}
 	} );
 } );
- 
+
 }); /* end of as page load scripts */
