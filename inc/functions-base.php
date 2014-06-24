@@ -104,7 +104,7 @@ function tr_scripts_and_styles() {
   if (!is_admin()) {
 
     // modernizr (without media query polyfill)
-    wp_register_script( 'tabula_rasa-modernizr', get_stylesheet_directory_uri() . '/js/modernizr.custom.min.js', array(), '2.5.3', false );
+    //wp_register_script( 'tabula_rasa-modernizr', get_stylesheet_directory_uri() . '/js/modernizr.custom.min.js', array(), '2.5.3', false );
 
     // register main stylesheet
     wp_register_style( 'tabula_rasa-stylesheet', get_stylesheet_directory_uri() . '/css/style.css', array(), '', 'all' );
@@ -132,7 +132,7 @@ function tr_scripts_and_styles() {
 		
 	//dont know if this is styled right
 	//Adds JavaScript for handling the navigation menu hide-and-show behavior.
-	wp_enqueue_script( 'tr-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0', true );
+	//wp_enqueue_script( 'tr-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0', true );
 
 	// dont know is this is styled right
 	//wp_enqueue_script( 'Tabula Rasa-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
@@ -142,7 +142,7 @@ wp_register_script( 'tabula_rasa-cycle', get_stylesheet_directory_uri() . '/js/j
     wp_enqueue_script( 'mmenu-js' );		
     wp_enqueue_style( 'mmenu-css' );
     // enqueue styles and scripts
-    wp_enqueue_script( 'tabula_rasa-modernizr' );
+    //wp_enqueue_script( 'tabula_rasa-modernizr' );
     wp_enqueue_style( 'tabula_rasa-stylesheet' );
     wp_enqueue_style('tabula_rasa-ie-only');
 

@@ -189,4 +189,22 @@ function google_analytics_tracking_code(){ ?>
 	</script>
 <?php }	
 add_action('wp_head', 'google_analytics_tracking_code');
+
+/** Remove Contact Form 7 form every page except the contact page
+********************************************************************/
+// Deregister Contact Form 7 styles
+function aa_deregister_styles() {
+	if ( ! is_page( 'contact' ) ) {
+		wp_deregister_style( 'contact-form-7' );
+	}
+}
+add_action( 'wp_print_styles', 'aa_deregister_styles', 100 );
+
+// Deregister Contact Form 7 JavaScript files on all pages without a form
+function aa_deregister_javascript() {
+	if ( ! is_page( 'contact' ) ) {
+		wp_deregister_script( 'contact-form-7' );
+	}
+}
+add_action( 'wp_print_scripts', 'aa_deregister_javascript', 100 );
 ?>
